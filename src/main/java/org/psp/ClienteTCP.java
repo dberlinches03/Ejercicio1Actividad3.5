@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class ClienteTCP {
     public static void main(String[] args) {
         String servidor = "localhost";
-        int puerto = 5080; // El puerto del servidor
+        int puerto = 5000; // El puerto del servidor
 
         // El cliente manda la respuesta al servidor
         try (
