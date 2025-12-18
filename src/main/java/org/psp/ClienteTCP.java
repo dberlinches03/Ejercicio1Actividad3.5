@@ -26,10 +26,12 @@ public class ClienteTCP {
             while ((mensajeServidor = entrada.readLine()) != null) {
                 System.out.println("Servidor: " + mensajeServidor);
 
+                // Te pregunta el servidor si quieres volver a jugar
                 if (mensajeServidor.contains("¿Quieres jugar")) {
                     String respuesta = teclado.nextLine();
                     salida.println(respuesta);
 
+                    // Si respondes si vuelves a jugar y si no se cierra el cliente
                     if (!respuesta.equalsIgnoreCase("si")) {
                         break;
                     }
