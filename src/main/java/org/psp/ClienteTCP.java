@@ -9,33 +9,44 @@ import java.util.Scanner;
 
 public class ClienteTCP {
     public static void main(String[] args) {
-        String servidor = "localhost";
+        String servidor = "localhost"; // Direccion del servidor
         int puerto = 5000; // El puerto del servidor
 
         // El cliente manda la respuesta al servidor
         try (
+                // Socket que conecta con el servidor
                 Socket socket = new Socket(servidor, puerto);
+
+                // Flujo de entrada para recibir mensajes del servidor
                 BufferedReader entrada = new BufferedReader(
                         new InputStreamReader(socket.getInputStream()));
+
+                // Flujo de salida para enviar mensajes al servidor
                 PrintWriter salida = new PrintWriter(
                         socket.getOutputStream(), true);
+
+                // Scanner para leer datos desde teclado
                 Scanner teclado = new Scanner(System.in)
         ) {
             String mensajeServidor;
 
+            // Bucle que recibe mensajes del servidor
             while ((mensajeServidor = entrada.readLine()) != null) {
+
+                // Muestra el mensaje del servidor
                 System.out.println("Servidor: " + mensajeServidor);
 
-                // Te pregunta el servidor si quieres volver a jugar
+                // Si el servidor pregunta si quiere volver a jugar
                 if (mensajeServidor.contains("¿Quieres jugar")) {
                     String respuesta = teclado.nextLine();
                     salida.println(respuesta);
 
-                    // Si respondes si vuelves a jugar y si no se cierra el cliente
+                    // Si el usuario no quiere seguir, se sale
                     if (!respuesta.equalsIgnoreCase("si")) {
                         break;
                     }
                 } else {
+                    // El servidor espera un número
                     String numero = teclado.nextLine();
                     salida.println(numero);
                 }
