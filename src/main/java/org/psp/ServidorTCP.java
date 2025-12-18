@@ -17,7 +17,7 @@ public class ServidorTCP {
                 System.out.println("Cliente conectado");
 
                 // Un hilo por cliente
-
+                new ClientHandler(cliente).start();
             }
 
         } catch (IOException e) {
